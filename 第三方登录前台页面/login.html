@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="layui/layui.js"></script>
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="layui/css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="css/verify.css"/>
+	<script src="js/verify.js"></script>
+</head>
+<body style="background: url(images/eason2.jpg);">
+	<div class="layui-container" style="position: absolute; left: 35%;top: 20%;">
+		<div class="layui-row" style="width: 500px; ">
+			<form class="layui-form" >
+			  <div class="layui-form-item">
+			    <label class="layui-form-label" style="color: #fff;">登录名</label>
+			    <div class="layui-input-inline">
+			      <input type="text" id="loginName" name="loginName" required  lay-verify="required" placeholder="请输入登录名" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label" style="color: #fff;">密码框</label>
+			    <div class="layui-input-inline">
+			      <input type="password" id="Upassword" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			  	<label class="layui-form-label" id="login_error" style="color: #fff;"></label>
+			  </div>
+			  <div id="yanzhen" style="width: 400px;"></div>	
+			   <div class="layui-form-item" style="margin-top: 20px;">
+			    <div class="layui-input-block">
+			      <button type="button" href="javascript:void(0);" class="layui-btn layui-btn-normal" id="sub">登录账号</button>
+			      <a href="http://www.merryyou.cn/login/qq" class="layui-btn layui-btn-normal" id="sub">QQ登录</a>
+			    </div>
+			  </div>	
+			</form>
+		</div>
+	</div>
+
+<script type="text/javascript" src="js/login.js" ></script>
+<script>
+	$.ajax({
+		url:"http://www.merryyou.cn/sysUser/user",
+		type:"get",
+		xhrFields: {
+   			withCredentials: true
+   		},
+		crossDomain: true,
+		dataType:"json",
+		success:function(res){
+			console.log(res);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+</script>
+</body>
+</html>

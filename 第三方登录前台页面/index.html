@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>后台管理系统</title>
+	<link rel="stylesheet" href="layui/css/layui.css" />
+	<script src="layui/layui.js"></script>
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="css/user.css" />
+	
+	
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo layui-bg-black">投票后台管理</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+   <!-- <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item" ><a href="">控制台</a></li>
+      <li class="layui-nav-item"><a href="">商品管理</a></li>
+      <li class="layui-nav-item"><a href="">用户</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">其它系统</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">消息管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+    </ul>-->
+    
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;" id="user_login_name">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          
+        </a>
+        <dl class="layui-nav-child" id="nav_child">
+          <dd><a href="">基本资料</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="" id="loginout">退出</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test11">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">系统管理</a>
+          <dl class="layui-nav-child">
+            <dd> 
+            	<a data-url="a" data-id="user.html" data-title="用户表" href="#" class="site-demo-active" data-type="tabAdd">用户表</a>
+            </dd>
+            <dd>
+            	<a href="#" data-id="superstar.html" data-url="b" data-title="选手信息" class="site-demo-active" data-type="tabAdd">选手信息</a>
+            </dd>
+            <dd>
+            	<a href="#" data-id="starGroup.html" data-url="b" data-title="选手分组信息" class="site-demo-active" data-type="tabAdd">选手分组信息</a>
+            </dd>
+          </dl>
+        </li>
+       <!-- <li class="layui-nav-item">
+          <a href="javascript:;">解决方案</a>
+          <dl class="layui-nav-child">
+            <dd><a class="site-demo-active" href="javascript:;">列表一</a></dd>
+            <dd><a class="site-demo-active" href="javascript:;">列表二</a></dd>
+            <dd><a class="site-demo-active" href="#">超链接</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+        	 <a href="#" data-url="c" data-title="选项c"  data-id="33" class="site-demo-active" data-type="tabAdd">产品c</a>
+        </li>
+        <li class="layui-nav-item">
+        	<a href="">发布商品</a>
+        </li>-->
+      </ul>
+    </div>
+    
+  </div>
+  
+  <div class="layui-body" >
+	<div class="layadmin-pagetabs">
+	  	<div class="layui-tab"  lay-allowClose="true" lay-filter="layadmin-layout-tabs" >
+		  <ul class="layui-tab-title">
+		  	<li lay-id="welcome.html" class="layui-this">
+		  		<i class="layui-icon layui-icon-home"></i>
+		  	</li>
+		  </ul>
+    	</div>
+  	</div>
+  
+  	<div class="layadmin-tabsbody-item layui-show">
+  		<iframe class="layadmin-iframe" id="frameHou" frameborder="0" src="welcome.html"></iframe>
+  	</div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © layui.com - 底部固定区域
+  </div>
+</div>
+
+
+
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+	var $ = layui.jquery;
+  	var element = layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+  	element.on('tab(layadmin-layout-tabs)', function(){
+	  	$('#frameHou').attr('src',this.getAttribute("lay-id"));
+  	});
+     //触发事件
+     var active = {
+     	//在这里给active绑定几项事件，后面可通过active调用这些事件
+     	tabAdd: function(url,id,name){
+     		//新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
+            //关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
+            element.tabAdd('layadmin-layout-tabs',{
+            	title: name,
+            	id: id, //规定好的id
+            })
+     	},
+     	tabChange: function(id){
+     		//切换到指定Tab项
+     		element.tabChange('layadmin-layout-tabs',id);//根据传入的id传入到指定的tab项
+     	},
+     	tabDelete: function(id){
+     		element.tabDelete('layadmin-layout-tabs',id);//删除
+     	},
+     	tabDeleteAll: function(ids){//删除所有
+     		$.each(ids, function(i,item) {
+     			element.tabDelete("layadmin-layout-tabs",item);//ids是一个数组，里面存放了多个id，调用tabDelete方法分别删除
+     		});
+     	}
+     };
+     
+     //当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件
+     $('.site-demo-active').on('click',function(){
+     	var dataid = $(this);
+     	
+     	//这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
+     	if($('.layui-tab-title li[lay-id]').length <= 0){
+     		 //如果比零小，则直接打开新的tab项
+     		 active.tabAdd(dataid.attr("data-url"),dataid.attr("data-id"),dataid.attr('data-title'));
+     	}else{
+     		//否则判断该tab项是否以及存在
+     		var isData = false;//初始化一个标志，为false说明未打开该tab项 为true则说明已有
+     		$.each($('.layui-tab-title li[lay-id]'),function(){
+     		 	 //如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
+                if ($(this).attr("lay-id") == dataid.attr("data-id")) {
+                    isData = true;
+                }
+     		})
+     		if(isData == false){
+     		 	//标志为false 新增一个tab项
+     		 	active.tabAdd(dataid.attr("data-url"),dataid.attr('data-id'),dataid.attr("data-title"));
+     		}
+     	}
+     	//最后不管是否新增tab，最后都转到要打开的选项页面上
+        active.tabChange(dataid.attr("data-id"));
+     })
+});	
+</script>
+<script src="js/user.js"></script>
+</body>
+</html>

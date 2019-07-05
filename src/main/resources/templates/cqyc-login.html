@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>标准登录页面</h2>
+<h3>表单登录</h3>
+<form th:action="@{/authentication/login}"  method="post">
+    <table>
+        <tr>
+            <td>用户名:</td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>密码:</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>图形验证码:</td>
+            <td>
+                <input type="text" name="imageCode">
+                <img th:src="@{/code/image(width=200)}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'><input name="remember-me" type="checkbox" value="true" />记住我</td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">登录</button></td>
+        </tr>
+    </table>
+</form>
+
+<h3>短信登录</h3>
+<form action="/authentication/mobile" method="post">
+    <table>
+        <tr>
+            <td>手机号:</td>
+            <td><input type="text" name="mobile" value="13022326792"></td>
+        </tr>
+        <tr>
+            <td>短信验证码:</td>
+            <td>
+                <input type="text" name="smsCode">
+                <a th:href="@{/code/sms(mobile=13022326792)}">发送验证码</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">登录</button></td>
+        </tr>
+    </table>
+</form>
+&redirect_uri=http%3A%2F%2Fwww.ictgu.cn%2Flogin%2Fqq
+
+<h3>社交登录</h3>
+<a th:href="@{/login/qq}">QQ登录</a>
+</body>
+</html>
