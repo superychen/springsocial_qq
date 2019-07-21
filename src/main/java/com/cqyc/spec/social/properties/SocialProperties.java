@@ -10,5 +10,6 @@ import lombok.Data;
 @Data
 public class SocialProperties {
     private QQproperties qq = new QQproperties();
+    private WeixinProperties weixin = new WeixinProperties();
     private String filterProcessesUrl =  "/auth";
 }
